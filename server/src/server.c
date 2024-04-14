@@ -8,9 +8,11 @@ int main(void) {
 	int cliente_fd = esperar_cliente(server_fd);
 
 	t_list* lista;
+	int cod_op;
 	while (1) {
-		int cod_op = recibir_operacion(cliente_fd);
+		cod_op = recibir_operacion(cliente_fd);
 		switch (cod_op) {
+		printf("cod_op value: %d\n", cod_op);
 		case MENSAJE:
 			recibir_mensaje(cliente_fd);
 			break;

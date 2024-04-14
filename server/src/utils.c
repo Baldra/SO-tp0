@@ -47,9 +47,7 @@ int esperar_cliente(int socket_servidor)
 	int socket_cliente;
 
 	socket_cliente = accept(socket_servidor, NULL, NULL);
-
-	int* r = recibir_operacion(socket_cliente);
-	send(socket_cliente, &r, sizeof(int), 0);	
+	
 
 	log_info(logger, "Se conecto un cliente!");
 
@@ -59,9 +57,9 @@ int esperar_cliente(int socket_servidor)
 int recibir_operacion(int socket_cliente)
 {
 	int cod_op;
-	if(recv(socket_cliente, &cod_op, sizeof(int), MSG_WAITALL) > 0)
+	if(recv(socket_cliente, &cod_op, sizeof(int), MSG_WAITALL) > 0){
 		return cod_op;
-	else
+	} else
 	{
 		close(socket_cliente);
 		return -1;

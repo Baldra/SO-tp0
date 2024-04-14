@@ -63,6 +63,12 @@ int main(void)
 
 	// Enviamos al servidor el valor de CLAVE como mensaje
 	enviar_mensaje(valor, conexion);
+	enviar_mensaje("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", conexion);
+	enviar_mensaje("test", conexion);
+
+	enviar_mensaje("siiuuuuuuu", conexion);
+
+
 
 	// Armamos y enviamos el paquete
 	paquete(conexion);
@@ -119,13 +125,14 @@ void paquete(int conexion)
 
 	// Leemos y esta vez agregamos las lineas al paquete
 	leido = readline(">");
-	agregar_a_paquete(paquete, leido, strlen(leido));
+	agregar_a_paquete(paquete, leido, strlen(leido)+1);
 	while(strcmp(leido, "") != 0){
-		agregar_a_paquete(paquete, leido, strlen(leido));
+		agregar_a_paquete(paquete, leido, strlen(leido)+1);
 		free(leido);
 		leido = readline(">");
 	}
 	enviar_paquete(paquete, conexion);
+	eliminar_paquete(paquete);
 
 
 	// ¡No te olvides de liberar las líneas y el paquete antes de regresar!
